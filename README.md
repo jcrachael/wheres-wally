@@ -1,6 +1,6 @@
 # Where's Wally?
 
-Live demo coming soon.
+[View live demo](https://where-s-wally-32c9e.web.app/) (under construction).
 
 A photo-based game built using Firebase and React.
 
