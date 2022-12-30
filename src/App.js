@@ -1,24 +1,33 @@
-// Styles
-import "./App.css";
-import handleSubmit from "./handles/handleSubmit";
-import { useRef } from "react";
-import { SampleForm } from "./components/SampleForm";
+// React-router-dom
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  createRoutesFromElements,
+} from "react-router-dom";
+
+// Custom components
+import Template from "./components/Template";
+import ErrorPage from "./components/ErrorPage";
+import Home from "./routes/Home";
+import TopScores from "./routes/TopScores";
 
 function App() {
-  const dataRef = useRef();
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    handleSubmit(dataRef.current.value);
-    dataRef.current.value = "";
-  };
+  // Router config
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Template />} errorElement={<ErrorPage />}>
+        <Route errorElement={<ErrorPage />}>
+          <Route index element={<Home />} />
+          <Route path="/topscores" element={<TopScores />} />
+        </Route>
+      </Route>
+    )
+  );
 
   return (
     <div className="App">
-      <header>
-        <h1>Where's Wally?</h1>
-      </header>
-      <SampleForm submitHandler={submitHandler} dataRef={dataRef} />
+      <RouterProvider router={router} />
     </div>
   );
 }
