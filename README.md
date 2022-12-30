@@ -10,6 +10,12 @@ Project sourced from The Odin Project's [JavaScript Course](https://www.theodinp
 
 Level 1: find Wally, Wanda and Oswald
 
+## To-Dos
+
+1. Design UI/UX in Figma
+2. Implement front end functionality (sans back end) with React
+3. Implement back end functionality with Firebase
+
 ---
 
 Last modified: 30 December 2022
