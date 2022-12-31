@@ -30,7 +30,7 @@ header {
   padding-right: 2rem;
 }
 
-.tallies {
+.score {
   display: flex;
   align-items: center;
 }

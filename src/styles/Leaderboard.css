@@ -1,0 +1,27 @@
+.Leaderboard {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #d9d9d9;
+}
+
+tr {
+  height: 50px;
+}
+
+tbody > tr {
+  border-bottom: 1px #d9d9d9 solid;
+}
+
+th,
+td {
+  padding: 1rem;
+}

@@ -6,7 +6,7 @@ export default function Home() {
   let level = 1;
   return (
     <div className="Home">
-      <InfoBar />
+      <InfoBar view="game" />
       <GameLevel level={level} />
     </div>
   );
