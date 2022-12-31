@@ -1,11 +1,11 @@
 const config = {
-  apiKey: "AIzaSyCEHmAs5JZJ--Z2rH_MQs6jv9UX7KtsIwo",
-  authDomain: "where-s-wally-32c9e.firebaseapp.com",
-  projectId: "where-s-wally-32c9e",
-  storageBucket: "where-s-wally-32c9e.appspot.com",
-  messagingSenderId: "733291849825",
-  appId: "1:733291849825:web:43e18833e263cfa10b6220",
-  measurementId: "G-PY8P3B565F",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MSG_SEND_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 export function getFirebaseConfig() {
