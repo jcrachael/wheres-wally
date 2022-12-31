@@ -6,13 +6,17 @@ A photo-based game built using Firebase and React.
 
 Project sourced from The Odin Project's [JavaScript Course](https://www.theodinproject.com/lessons/node-path-javascript-where-s-waldo-a-photo-tagging-app).
 
+## To Dos
+
+1. Fix x-coordinates for level 1 chars (Wally, Wanda and Oswald)
+
 ## Levels
 
 Level 1: find Wally, Wanda and Oswald
 
 ### Credits
 
-Tick icon created by [Freepik](https://www.flaticon.com/free-icons/tick) on Flaticon.
+Tick icon created by [Freepik](https://www.flaticon.com/free-icons/tick) on [Flaticon](https://www.flaticon.com/).
 
 ---
 
