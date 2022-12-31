@@ -1,23 +1,17 @@
 .BeginModal {
   position: fixed;
   z-index: 1;
-  left: 0;
-  top: 0;
+  height: 790px;
   width: 100%;
-  height: 100%;
+  top: 100px;
   overflow: auto;
   background-color: white;
   background-color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .begin-modal-content {
-  margin: 50% auto;
-}
-
-.begin-btn {
-  background-color: #ec1c24;
-}
-
-.begin-btn:hover {
-  background-color: #b81318;
+  margin-top: 150px;
 }

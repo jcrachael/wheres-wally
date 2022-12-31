@@ -1,32 +1,23 @@
 // React-router-dom
-import { Link } from "react-router-dom";
-
 import CharList from "./CharList";
+import Score from "./Score";
+import "../styles/InfoBar.css";
+import { useLocation } from "react-router-dom";
 
-export default function InfoBar({ view }) {
+export default function InfoBar({ view, timer }) {
+  const location = useLocation();
+
   return (
     <div className="InfoBar">
       <div className="info-left">
         <h2 className="infobar-title">
           {" "}
-          {view === "game" ? "Searching for:" : "Top scores"}
+          {location.pathname === "/topscores" ? "Top scores" : "Searching for:"}
         </h2>
-        {view === "game" && <CharList />}
+        {view === "playing" && <CharList />}
       </div>
       <div className="info-right">
-        {view === "game" ? (
-          <Link to="/topscores">
-            <button type="button" className="btn go-to-scores-btn">
-              Top scores
-            </button>
-          </Link>
-        ) : (
-          <Link to="/">
-            <button type="button" className="btn go-to-home-btn">
-              Go back
-            </button>
-          </Link>
-        )}
+        {view === "playing" && <Score timer={timer} />}
       </div>
     </div>
   );

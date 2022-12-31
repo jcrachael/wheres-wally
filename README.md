@@ -10,6 +10,8 @@ Project sourced from The Odin Project's [JavaScript Course](https://www.theodinp
 
 Level 1: find Wally, Wanda and Oswald
 
----
+### Credits
 
-Last modified: 30 December 2022
+## Tick icon created by [Freepik](https://www.flaticon.com/free-icons/tick) on Flaticon.
+
+Last modified: 31 December 2022

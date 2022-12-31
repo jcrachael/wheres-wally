@@ -1,9 +1,9 @@
 import "../styles/BeginModal.css";
 
-export default function BeginModal({ show, handleClick }) {
+export default function BeginModal({ view, handleClick }) {
   return (
     <>
-      {show && (
+      {view === "init" && (
         <div className="BeginModal">
           <div className="begin-modal-content">
             <button

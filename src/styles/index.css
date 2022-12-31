@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap");
 
+:root {
+  --main-red: #f04950;
+  --main-red-dark: #ec1c24;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,4 +13,33 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+}
+
+button,
+.btn {
+  background-color: var(--main-red);
+  outline: none;
+  border: none;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--main-red-dark);
+}
+
+a {
+  color: var(--main-red);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

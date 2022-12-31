@@ -1,34 +1,3 @@
-.InfoBar {
-  width: 1000px;
-  margin: 0 auto;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.info-left {
-  display: flex;
-  align-items: center;
-}
-
-.infobar-title {
-  margin-right: 2rem;
-}
-
-.chars {
-  display: flex;
-}
-
-.char {
-  width: 100px;
-  text-align: center;
-}
-
-.char-img {
-  width: 50px;
-}
-
 .GameLevel {
   text-align: center;
 }
