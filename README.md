@@ -12,6 +12,8 @@ Level 1: find Wally, Wanda and Oswald
 
 ### Credits
 
-## Tick icon created by [Freepik](https://www.flaticon.com/free-icons/tick) on Flaticon.
+Tick icon created by [Freepik](https://www.flaticon.com/free-icons/tick) on Flaticon.
+
+---
 
 Last modified: 31 December 2022
