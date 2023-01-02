@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { levels } from "./Levels";
 
-export default function GameLevel({ level }) {
-  const [currentLevel, setCurrentLevel] = useState(levels[level - 1]);
-
+export default function GameLevel({
+  currentLevel,
+  setCurrentLevel,
+  gameState,
+  setGameState,
+}) {
   let foundAChar = null;
 
   // Checks if the user clicked on a char
@@ -21,7 +23,10 @@ export default function GameLevel({ level }) {
     return foundAChar;
   }
 
+  // Event handler for level image click
   function handleImgClick(e) {
+    // TODO: display the clickbox and dropdown menu
+
     checkCoords(e.nativeEvent.offsetX, e.nativeEvent.offsetY, currentLevel);
     let char = foundAChar;
     if (char !== null) {
@@ -49,6 +54,8 @@ export default function GameLevel({ level }) {
     if (win === true) {
       // DEBUG console logs
       console.log("You found all the chars! Level complete!");
+
+      setGameState("won");
     }
   }, [currentLevel]);
 
@@ -59,6 +66,7 @@ export default function GameLevel({ level }) {
         alt="Can you find Wally?"
         className="level-img"
         onClick={handleImgClick}
+        loading="lazy"
       />
     </div>
   );

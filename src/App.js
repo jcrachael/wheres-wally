@@ -1,5 +1,5 @@
 // React
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // React-router-dom
 import {
@@ -15,24 +15,28 @@ import ErrorPage from "./components/ErrorPage";
 import Home from "./routes/Home";
 import TopScores from "./routes/TopScores";
 
+// Dummy data
+import { levels } from "./components/Levels";
+
 function App() {
   // States for the game
   const [gameState, setGameState] = useState("init"); // or 'playing' or 'won'
-  const [timer, setTimer] = useState("00.00"); // TODO set timer
+  const [timer, setTimer] = useState(0); // TODO set timer
+  const [userTime, setUserTime] = useState(0);
   const [username, setUsername] = useState(null); // username for leaderboard
   const [leaderboard, setLeaderboard] = useState([]); // the database data for displaying on /topscores
   const [level, setLevel] = useState(1); // the game level
+  const [currentLevel, setCurrentLevel] = useState(levels[level - 1]);
 
   // on click handler for begin game btn click
   function handleBeginGame() {
     setGameState("playing");
-
-    // TODO: begin timer
   }
 
   function restartGame() {
     setGameState("init");
-    setTimer("00.00");
+    setTimer(0);
+    setCurrentLevel(levels[level - 1]);
   }
 
   // Router config
@@ -51,6 +55,10 @@ function App() {
                 timer={timer}
                 setTimer={setTimer}
                 restartGame={restartGame}
+                userTime={userTime}
+                setUserTime={setUserTime}
+                currentLevel={currentLevel}
+                setCurrentLevel={setCurrentLevel}
               />
             }
           />

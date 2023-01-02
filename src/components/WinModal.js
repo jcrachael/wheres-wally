@@ -15,7 +15,16 @@ export default function WinModal({ view, timer, restartGame }) {
           </div>
           <p>
             You found Wally and his friends in{" "}
-            <span className="bold">{timer}</span> seconds!
+            <span className="bold">
+              <span className="timer-digits">
+                {("0" + Math.floor((timer / 1000) % 60)).slice(-2)}.
+              </span>
+              <span className="timer-digits mili-sec">
+                {("0" + Math.floor((timer / 10) % 1000)).slice(-2)}
+              </span>
+              <span className="timer-digits s">s</span>
+            </span>
+            !
           </p>
           <p>Would you like to save your score?</p>
           <Form method="post">

@@ -1,23 +1,10 @@
 // Char images
-import wally from "../img/characters/wally.svg";
-import wanda from "../img/characters/wanda.svg";
-import oswald from "../img/characters/oswald.svg";
+import Char from "./Char";
 
-export default function CharList() {
-  return (
-    <div className="chars">
-      <div className="wally char">
-        <img src={wally} alt="Wally" className="wally-img char-img" />
-        <p className="char-name">Wally</p>
-      </div>
-      <div className="wanda char">
-        <img src={wanda} alt="Wanda" className="wanda-img char-img" />
-        <p className="char-name">Wanda</p>
-      </div>
-      <div className="oswald char">
-        <img src={oswald} alt="Oswald" className="oswald-img char-img" />
-        <p className="char-name">Oswald</p>
-      </div>
-    </div>
-  );
+export default function CharList({ currentLevel }) {
+  const list = currentLevel.chars.map((char) => {
+    return <Char key={char.id} char={char} />;
+  });
+
+  return <div className="chars">{list}</div>;
 }

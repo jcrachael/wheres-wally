@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { levels } from "../components/Levels";
 import InfoBar from "../components/InfoBar";
 import GameLevel from "../components/GameLevel";
 import BeginModal from "../components/BeginModal";
@@ -13,10 +14,13 @@ export default function Home({
   timer,
   setTimer,
   restartGame,
+  userTime,
+  setUserTime,
+  currentLevel,
+  setCurrentLevel,
 }) {
   useEffect(() => {
-    setGameState("init");
-    setTimer("00.00");
+    restartGame();
   }, []);
 
   return (
@@ -25,11 +29,23 @@ export default function Home({
         <BeginModal view={gameState} handleClick={handleBeginGame} />
       )}
       {gameState === "won" && (
-        <WinModal view={gameState} restartGame={restartGame} timer={timer} />
+        <WinModal view={gameState} restartGame={restartGame} timer={userTime} />
       )}
 
-      <InfoBar view={gameState} timer={timer} />
-      <GameLevel level={level} />
+      <InfoBar
+        gameState={gameState}
+        timer={timer}
+        setTimer={setTimer}
+        currentLevel={currentLevel}
+        userTime={userTime}
+        setUserTime={setUserTime}
+      />
+      <GameLevel
+        currentLevel={currentLevel}
+        setCurrentLevel={setCurrentLevel}
+        gameState={gameState}
+        setGameState={setGameState}
+      />
     </div>
   );
 }
