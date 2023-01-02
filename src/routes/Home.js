@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
-import { levels } from "../components/Levels";
+import { useEffect } from "react";
+
 import InfoBar from "../components/InfoBar";
 import GameLevel from "../components/GameLevel";
 import BeginModal from "../components/BeginModal";
 import WinModal from "../components/WinModal";
-import "../styles/Home.css";
 
 export default function Home({
   gameState,
   setGameState,
-  level,
   handleBeginGame,
   timer,
   setTimer,
@@ -18,6 +16,8 @@ export default function Home({
   setUserTime,
   currentLevel,
   setCurrentLevel,
+  clickBox,
+  setClickBox,
 }) {
   useEffect(() => {
     restartGame();
@@ -45,6 +45,8 @@ export default function Home({
         setCurrentLevel={setCurrentLevel}
         gameState={gameState}
         setGameState={setGameState}
+        clickBox={clickBox}
+        setClickBox={setClickBox}
       />
     </div>
   );

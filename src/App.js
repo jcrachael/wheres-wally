@@ -21,12 +21,18 @@ import { levels } from "./components/Levels";
 function App() {
   // States for the game
   const [gameState, setGameState] = useState("init"); // or 'playing' or 'won'
-  const [timer, setTimer] = useState(0); // TODO set timer
+  const [timer, setTimer] = useState(0);
+  const [level, setLevel] = useState(1); // the game level
+  const [currentLevel, setCurrentLevel] = useState(levels[level - 1]);
   const [userTime, setUserTime] = useState(0);
   const [username, setUsername] = useState(null); // username for leaderboard
   const [leaderboard, setLeaderboard] = useState([]); // the database data for displaying on /topscores
-  const [level, setLevel] = useState(1); // the game level
-  const [currentLevel, setCurrentLevel] = useState(levels[level - 1]);
+  const clickBoxObject = {
+    x: 0,
+    y: 0,
+    visibility: "hidden",
+  };
+  const [clickBox, setClickBox] = useState(clickBoxObject);
 
   // on click handler for begin game btn click
   function handleBeginGame() {
@@ -37,6 +43,7 @@ function App() {
     setGameState("init");
     setTimer(0);
     setCurrentLevel(levels[level - 1]);
+    setClickBox(clickBoxObject);
   }
 
   // Router config
@@ -59,6 +66,8 @@ function App() {
                 setUserTime={setUserTime}
                 currentLevel={currentLevel}
                 setCurrentLevel={setCurrentLevel}
+                clickBox={clickBox}
+                setClickBox={setClickBox}
               />
             }
           />

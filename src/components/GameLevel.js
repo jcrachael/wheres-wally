@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import "../styles/GameLevel.css";
 
 export default function GameLevel({
   currentLevel,
   setCurrentLevel,
   gameState,
   setGameState,
+  clickBox,
+  setClickBox,
 }) {
   let foundAChar = null;
 
@@ -23,15 +26,32 @@ export default function GameLevel({
     return foundAChar;
   }
 
+  function enableClickBox(x, y, e) {
+    // set the new clickbox with the click coords
+
+    let newClickBox = {
+      x: x + e.target.x - 25,
+      y: y - 25,
+      visibility: "visible",
+    };
+
+    setClickBox(newClickBox);
+  }
+
   // Event handler for level image click
   function handleImgClick(e) {
-    // TODO: display the clickbox and dropdown menu
-
-    checkCoords(e.nativeEvent.offsetX, e.nativeEvent.offsetY, currentLevel);
+    let x = e.nativeEvent.offsetX;
+    let y = e.nativeEvent.offsetY;
+    checkCoords(x, y, currentLevel);
     let char = foundAChar;
+    enableClickBox(x, y, e);
     if (char !== null) {
       // DEBUG console logs
       console.log(`You found ${char.name}!`);
+
+      // TODO: display the dropdown menu
+
+      // update the char.found to true
       let newChars = currentLevel.chars.map((item) => {
         if (char.id === item.id) {
           return { ...item, found: true };
@@ -40,6 +60,8 @@ export default function GameLevel({
         }
       });
       setCurrentLevel({ ...currentLevel, chars: newChars });
+    } else {
+      console.log("Noone here...");
     }
   }
 
@@ -59,6 +81,12 @@ export default function GameLevel({
     }
   }, [currentLevel]);
 
+  let clickBoxStyle = {
+    top: clickBox.y,
+    left: clickBox.x,
+    visibility: clickBox.visibility,
+  };
+
   return (
     <div className="GameLevel">
       <img
@@ -68,6 +96,9 @@ export default function GameLevel({
         onClick={handleImgClick}
         loading="lazy"
       />
+      {clickBox.visibility === "visible" && (
+        <div className="clickBox" style={clickBoxStyle}></div>
+      )}
     </div>
   );
 }
