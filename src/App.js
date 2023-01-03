@@ -33,6 +33,21 @@ function App() {
     visibility: "hidden",
   };
   const [clickBox, setClickBox] = useState(clickBoxObject);
+  const [notifActive, setNotifActive] = useState(false);
+  const [notification, setNotification] = useState("");
+
+  // Show the notification dialog
+  function showNotification(msg) {
+    setNotifActive(true);
+    setNotification(msg);
+    setTimeout(hideNotification, 2000);
+  }
+
+  // Hide the notification dialog
+  function hideNotification() {
+    setNotifActive(false);
+    setNotification("");
+  }
 
   // on click handler for begin game btn click
   function handleBeginGame() {
@@ -44,6 +59,7 @@ function App() {
     setTimer(0);
     setCurrentLevel(levels[level - 1]);
     setClickBox(clickBoxObject);
+    hideNotification();
   }
 
   // Router config
@@ -68,6 +84,10 @@ function App() {
                 setCurrentLevel={setCurrentLevel}
                 clickBox={clickBox}
                 setClickBox={setClickBox}
+                notifActive={notifActive}
+                notification={notification}
+                showNotification={showNotification}
+                hideNotification={hideNotification}
               />
             }
           />

@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
+  padding-bottom: 3rem;
 }
 
 .info-left {

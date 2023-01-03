@@ -1,0 +1,20 @@
+.notification {
+  border: 2px var(--main-red) solid;
+  background-color: #ffffff;
+  display: flex;
+  height: 2rem;
+  width: 250px;
+  padding: 1.3rem 1.8rem;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  position: absolute;
+  left: calc(50% - 125px);
+  top: 5%;
+}
+
+.notif-close {
+  font-size: 1.3rem;
+  color: var(--main-red);
+}

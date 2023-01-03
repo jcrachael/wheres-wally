@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/GameLevel.css";
+import Notification from "./Notification";
+import checkSymbol from "../img/check-symbol.png";
 
 export default function GameLevel({
   currentLevel,
@@ -8,16 +10,20 @@ export default function GameLevel({
   setGameState,
   clickBox,
   setClickBox,
+  notifActive,
+  notification,
+  showNotification,
+  hideNotification,
 }) {
   const [charFound, setCharFound] = useState(null);
-
-  // the Select form event handler
+  const [markers, setMarkers] = useState([]);
+  // Select form event handler
+  // the character the user selected from the form
+  // is the variable 'char'
+  // the character the user found on the image is
+  // the state variable 'charFound'
   function handleSelect(e) {
     e.preventDefault();
-    // the character the user selected from the form
-    // is the variable 'char'
-    // the character the user found on the image is
-    // the state variable 'charFound'
     let charSelected = e.nativeEvent.path[1][0].value;
     let char;
     currentLevel.chars.forEach((item) => {
@@ -26,13 +32,18 @@ export default function GameLevel({
       }
     });
     if (char === charFound) {
-      // TODO: implement notification popup for this info
-      console.log("You found " + char.name + "!");
+      showNotification(`You found ${char.name}!`);
       let newChars = setCharToFound(charFound);
       setCurrentLevel({ ...currentLevel, chars: newChars });
+      // Get the coords and set the clickbox there
+      let x = (char.x_min + char.x_max) / 2;
+      let y = (char.y_min + char.y_max) / 2;
+
+      // place the marker
+      let x_offset = e.target.parentElement.parentElement.previousSibling.x;
+      placeMarker(x, y, x_offset);
     } else {
-      // TODO: implement notification popup for this info
-      console.log("Try a closer look");
+      showNotification("Try again");
     }
     setCharFound(null);
     setClickBox({ ...clickBox, visibility: "hidden" });
@@ -52,6 +63,7 @@ export default function GameLevel({
       }
     });
     setCharFound(ch);
+    return ch;
   }
 
   function enableClickBox(x, y, e) {
@@ -62,6 +74,38 @@ export default function GameLevel({
       visibility: "visible",
     };
     setClickBox(newClickBox);
+  }
+
+  // Places a marker on the image at the given coords
+  function placeMarker(x, y, x_offset) {
+    let marker = {
+      id: Math.random() * 99,
+      x: x + x_offset - 25,
+      y: y - 25,
+      visibility: "visible",
+    };
+    setMarkers([...markers, marker]);
+  }
+
+  function getMarkers() {
+    let markerList = markers.map((item) => {
+      let markStyle = {
+        id: item.id,
+        top: item.y,
+        left: item.x,
+        visibility: item.visibility,
+      };
+      return (
+        <img
+          key={item.id}
+          src={checkSymbol}
+          alt="Found"
+          className="marker"
+          style={markStyle}
+        />
+      );
+    });
+    return markerList;
   }
 
   function setCharToFound(char) {
@@ -94,6 +138,7 @@ export default function GameLevel({
     let win = currentChars.every((v) => v === true);
     if (win === true) {
       setGameState("won");
+      setMarkers([]);
     }
   }, [currentLevel]);
 
@@ -119,6 +164,10 @@ export default function GameLevel({
 
   return (
     <div className="GameLevel">
+      {notifActive === true && (
+        <Notification msg={notification} hideNotification={hideNotification} />
+      )}
+      {markers.length > 0 && getMarkers()}
       <img
         src={currentLevel.img}
         alt="Can you find Wally?"

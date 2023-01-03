@@ -2,7 +2,7 @@
   border: 2px var(--main-red) solid;
   background-color: white;
   border-radius: 20px;
-  z-index: 1;
+  z-index: 3;
   overflow: auto;
   position: fixed;
   left: calc(50% - 307px);

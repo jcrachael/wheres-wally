@@ -18,6 +18,11 @@ export default function Home({
   setCurrentLevel,
   clickBox,
   setClickBox,
+  notifActive,
+  notification,
+
+  showNotification,
+  hideNotification,
 }) {
   useEffect(() => {
     restartGame();
@@ -47,6 +52,10 @@ export default function Home({
         setGameState={setGameState}
         clickBox={clickBox}
         setClickBox={setClickBox}
+        notifActive={notifActive}
+        notification={notification}
+        showNotification={showNotification}
+        hideNotification={hideNotification}
       />
     </div>
   );
