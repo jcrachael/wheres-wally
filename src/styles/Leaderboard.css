@@ -25,3 +25,7 @@ th,
 td {
   padding: 1rem;
 }
+
+.score {
+  justify-content: flex-start;
+}

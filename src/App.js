@@ -26,7 +26,6 @@ function App() {
   const [currentLevel, setCurrentLevel] = useState(levels[level - 1]);
   const [userTime, setUserTime] = useState(0);
   const [username, setUsername] = useState(null); // username for leaderboard
-  const [leaderboard, setLeaderboard] = useState([]); // the database data for displaying on /topscores
   const clickBoxObject = {
     x: 0,
     y: 0,
@@ -35,6 +34,18 @@ function App() {
   const [clickBox, setClickBox] = useState(clickBoxObject);
   const [notifActive, setNotifActive] = useState(false);
   const [notification, setNotification] = useState("");
+
+  // dummy
+  const topScoresData = [{ id: 0, username: "jcrachael", score: 2165 }];
+  const [leaderboard, setLeaderboard] = useState(topScoresData);
+
+  // Save user's time
+  function saveTime(name, time) {
+    setLeaderboard([
+      ...leaderboard,
+      { id: leaderboard.length, username: name, score: time },
+    ]);
+  }
 
   // Show the notification dialog
   function showNotification(msg) {
@@ -54,6 +65,7 @@ function App() {
     setGameState("playing");
   }
 
+  // Reset the game
   function restartGame() {
     setGameState("init");
     setTimer(0);
@@ -88,10 +100,14 @@ function App() {
                 notification={notification}
                 showNotification={showNotification}
                 hideNotification={hideNotification}
+                saveTime={saveTime}
               />
             }
           />
-          <Route path="/topscores" element={<TopScores />} />
+          <Route
+            path="/topscores"
+            element={<TopScores leaderboard={leaderboard} />}
+          />
         </Route>
       </Route>
     )

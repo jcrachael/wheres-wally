@@ -23,6 +23,7 @@ export default function Home({
 
   showNotification,
   hideNotification,
+  saveTime,
 }) {
   useEffect(() => {
     restartGame();
@@ -34,7 +35,12 @@ export default function Home({
         <BeginModal view={gameState} handleClick={handleBeginGame} />
       )}
       {gameState === "won" && (
-        <WinModal view={gameState} restartGame={restartGame} timer={userTime} />
+        <WinModal
+          view={gameState}
+          restartGame={restartGame}
+          timer={userTime}
+          saveTime={saveTime}
+        />
       )}
 
       <InfoBar
@@ -56,6 +62,8 @@ export default function Home({
         notification={notification}
         showNotification={showNotification}
         hideNotification={hideNotification}
+        userTime={userTime}
+        setUserTime={setUserTime}
       />
     </div>
   );

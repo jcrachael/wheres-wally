@@ -1,7 +1,18 @@
 import { Form } from "react-router-dom";
 import "../styles/WinModal.css";
+import { useNavigate } from "react-router-dom";
 
-export default function WinModal({ view, timer, restartGame }) {
+export default function WinModal({ view, timer, restartGame, saveTime }) {
+  const navigate = useNavigate();
+
+  function handleSaveTime(e) {
+    const userName = e.nativeEvent.path[1][0].value;
+    const usertime = timer;
+    saveTime(userName, usertime);
+    // redirect to /topscores
+    navigate("/topscores");
+  }
+
   return (
     <>
       {view === "won" && (
@@ -34,7 +45,9 @@ export default function WinModal({ view, timer, restartGame }) {
               id="username"
               name="username"
             />
-            <button type="submit">Save</button>
+            <button type="submit" onClick={handleSaveTime}>
+              Save
+            </button>
           </Form>
         </div>
       )}

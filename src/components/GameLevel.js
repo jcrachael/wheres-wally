@@ -17,6 +17,7 @@ export default function GameLevel({
 }) {
   const [charFound, setCharFound] = useState(null);
   const [markers, setMarkers] = useState([]);
+
   // Select form event handler
   // the character the user selected from the form
   // is the variable 'char'
