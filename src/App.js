@@ -9,6 +9,10 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
+// Firebase
+import { firestore } from "./firebase_setup/firebase"; // our database
+import { collection, getDocs, setDoc, doc, addDoc } from "firebase/firestore";
+
 // Custom components
 import Template from "./components/Template";
 import ErrorPage from "./components/ErrorPage";
@@ -35,16 +39,32 @@ function App() {
   const [notifActive, setNotifActive] = useState(false);
   const [notification, setNotification] = useState("");
 
-  // dummy
-  const topScoresData = [{ id: 0, username: "jcrachael", score: 2165 }];
-  const [leaderboard, setLeaderboard] = useState(topScoresData);
+  // Firestore database
+  // Sample leaderboard doc: { score: 7839, username: 'my_name' }
+  const [leaderboard, setLeaderboard] = useState([]);
+
+  // Gets the data from the 'db' database at the column 'string'
+  async function getData(db, string) {
+    const dataCol = collection(db, string);
+    const dataSnapshot = await getDocs(dataCol);
+    const dataList = dataSnapshot.docs.map((doc) => doc.data());
+    return dataList;
+  }
+
+  async function updateLeaderboard() {
+    let data = await getData(firestore, "leaderboard");
+    return setLeaderboard(data);
+  }
+
+  useEffect(() => {
+    updateLeaderboard();
+  });
 
   // Save user's time
-  function saveTime(name, time) {
-    setLeaderboard([
-      ...leaderboard,
-      { id: leaderboard.length, username: name, score: time },
-    ]);
+  async function saveTime(name, time) {
+    // manually adding to the leaderboard
+    const data = { score: time, username: name };
+    await addDoc(collection(firestore, "leaderboard"), data);
   }
 
   // Show the notification dialog
