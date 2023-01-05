@@ -11,7 +11,14 @@ import {
 
 // Firebase
 import { firestore } from "./firebase_setup/firebase"; // our database
-import { collection, getDocs, setDoc, doc, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  query,
+  orderBy,
+  limit,
+} from "firebase/firestore";
 
 // Custom components
 import Template from "./components/Template";
@@ -26,10 +33,9 @@ function App() {
   // States for the game
   const [gameState, setGameState] = useState("init"); // or 'playing' or 'won'
   const [timer, setTimer] = useState(0);
-  const [level, setLevel] = useState(1); // the game level
+  const level = 1; // the game level
   const [currentLevel, setCurrentLevel] = useState(levels[level - 1]);
   const [userTime, setUserTime] = useState(0);
-  const [username, setUsername] = useState(null); // username for leaderboard
   const clickBoxObject = {
     x: 0,
     y: 0,
@@ -42,23 +48,38 @@ function App() {
   // Firestore database
   // Sample leaderboard doc: { score: 7839, username: 'my_name' }
   const [leaderboard, setLeaderboard] = useState([]);
+  const [topScores, setTopScores] = useState([]);
+  const leaderboardRef = collection(firestore, "leaderboard");
 
-  // Gets the data from the 'db' database at the column 'string'
-  async function getData(db, string) {
-    const dataCol = collection(db, string);
-    const dataSnapshot = await getDocs(dataCol);
-    const dataList = dataSnapshot.docs.map((doc) => doc.data());
-    return dataList;
+  async function getLeaderboard() {
+    const snapshot = await getDocs(leaderboardRef);
+    const list = snapshot.docs.map((doc) => doc.data());
+    return list;
   }
 
   async function updateLeaderboard() {
-    let data = await getData(firestore, "leaderboard");
+    let data = await getLeaderboard();
     return setLeaderboard(data);
+  }
+
+  // Gets the top 10 scores from the db
+  async function getTopScores() {
+    const q = query(leaderboardRef, orderBy("score", "asc"), limit(10));
+    const querySnapshot = await getDocs(q);
+    const queryList = querySnapshot.docs.map((doc) => doc.data());
+    return queryList;
+  }
+
+  // updates the leaderboard
+  async function updateTopScores() {
+    let data = await getTopScores();
+    return setTopScores(data);
   }
 
   useEffect(() => {
     updateLeaderboard();
-  });
+    updateTopScores();
+  }, [leaderboard]);
 
   // Save user's time
   async function saveTime(name, time) {
@@ -121,12 +142,13 @@ function App() {
                 showNotification={showNotification}
                 hideNotification={hideNotification}
                 saveTime={saveTime}
+                topScores={topScores}
               />
             }
           />
           <Route
             path="/topscores"
-            element={<TopScores leaderboard={leaderboard} />}
+            element={<TopScores topScores={topScores} />}
           />
         </Route>
       </Route>

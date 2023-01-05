@@ -1,11 +1,11 @@
+// Firebase
+
 import "../styles/Leaderboard.css";
 
-export default function Leaderboard({ leaderboard }) {
-  // dummy data for static page
-
-  const list = leaderboard.map((item) => {
+export default function Leaderboard({ topScores }) {
+  const list = topScores.map((item) => {
     return (
-      <tr key={item.id} id={item.id}>
+      <tr key={topScores.indexOf(item)} id={item.id}>
         <td className="username">{item.username}</td>
         <td className="score">
           <span className="timer-digits">
