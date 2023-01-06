@@ -6,7 +6,6 @@ import checkSymbol from "../img/check-symbol.png";
 export default function GameLevel({
   currentLevel,
   setCurrentLevel,
-  gameState,
   setGameState,
   clickBox,
   setClickBox,

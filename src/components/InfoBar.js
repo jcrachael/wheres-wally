@@ -11,7 +11,6 @@ export default function InfoBar({
   timer,
   setTimer,
   currentLevel,
-  userTime,
   setUserTime,
 }) {
   const location = useLocation();

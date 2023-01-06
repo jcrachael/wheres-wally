@@ -47,13 +47,11 @@ export default function Home({
         timer={timer}
         setTimer={setTimer}
         currentLevel={currentLevel}
-        userTime={userTime}
         setUserTime={setUserTime}
       />
       <GameLevel
         currentLevel={currentLevel}
         setCurrentLevel={setCurrentLevel}
-        gameState={gameState}
         setGameState={setGameState}
         clickBox={clickBox}
         setClickBox={setClickBox}
