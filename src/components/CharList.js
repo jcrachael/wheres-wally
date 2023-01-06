@@ -1,4 +1,3 @@
-// Char images
 import Char from "./Char";
 
 export default function CharList({ currentLevel }) {

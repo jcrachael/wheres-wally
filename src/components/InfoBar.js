@@ -1,10 +1,8 @@
-// React-router-dom
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import CharList from "./CharList";
 import Timer from "./Timer";
 import "../styles/InfoBar.css";
-
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 export default function InfoBar({
   gameState,
@@ -15,6 +13,8 @@ export default function InfoBar({
 }) {
   const location = useLocation();
 
+  // Starts the timer if gamestate = "playing", otherwise stops
+  // the timer; is called whenever gamestate changes
   useEffect(() => {
     let interval = null;
     if (gameState === "playing") {

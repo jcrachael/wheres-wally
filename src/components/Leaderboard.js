@@ -1,5 +1,3 @@
-// Firebase
-
 import "../styles/Leaderboard.css";
 
 export default function Leaderboard({ topScores }) {

@@ -1,15 +1,15 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import "../styles/WinModal.css";
-import { useNavigate } from "react-router-dom";
 
 export default function WinModal({ view, timer, restartGame, saveTime }) {
   const navigate = useNavigate();
 
+  // event handler for the Submit event that calls saveTime() and
+  // redirects to /topscores route
   function handleSaveTime(e) {
     const userName = e.nativeEvent.path[1][0].value;
     const usertime = timer;
     saveTime(userName, usertime);
-    // redirect to /topscores
     navigate("/topscores");
   }
 

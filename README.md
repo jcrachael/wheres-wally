@@ -10,8 +10,10 @@ Tick icon created by [Maxim Basinski Premium](https://www.flaticon.com/free-icon
 
 ## To dos:
 
-1. Transfer 'levels' data to Firestore
-2. Implement Level 2
+1. Transfer `levels` data to Firebase
+2. Check if leaderboard variable in `App.js` is required
+3. Check if the `useEffect()` that gets the leaderboard and topScores data on initial render in `App.js` is required; bugfix the infinite loop that makes infinite calls to Firebase
+4. Implement level 2
 
 ---
 

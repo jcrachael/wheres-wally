@@ -17,11 +17,21 @@ export default function GameLevel({
   const [charFound, setCharFound] = useState(null);
   const [markers, setMarkers] = useState([]);
 
+  // Checks for a win after each char found
+  useEffect(() => {
+    let currentChars = currentLevel.chars.map((item) => {
+      return item.found;
+    });
+    let win = currentChars.every((v) => v === true);
+    if (win === true) {
+      setGameState("won");
+      setMarkers([]);
+    }
+  }, [currentLevel]);
+
   // Select form event handler
-  // the character the user selected from the form
-  // is the variable 'char'
-  // the character the user found on the image is
-  // the state variable 'charFound'
+  // > The character the user selected from the form is the variable 'char'
+  // > The character the user found on the image is the state variable 'charFound'
   function handleSelect(e) {
     e.preventDefault();
     let charSelected = e.nativeEvent.path[1][0].value;
@@ -38,7 +48,6 @@ export default function GameLevel({
       // Get the coords and set the clickbox there
       let x = (char.x_min + char.x_max) / 2;
       let y = (char.y_min + char.y_max) / 2;
-
       // place the marker
       let x_offset = e.target.parentElement.parentElement.previousSibling.x;
       placeMarker(x, y, x_offset);
@@ -66,8 +75,8 @@ export default function GameLevel({
     return ch;
   }
 
+  // Sets the new clickbox with the click coords
   function enableClickBox(x, y, e) {
-    // set the new clickbox with the click coords
     let newClickBox = {
       x: x + e.target.x - 25,
       y: y - 25,
@@ -87,6 +96,7 @@ export default function GameLevel({
     setMarkers([...markers, marker]);
   }
 
+  // Gets an array of JSX elements from the markers array
   function getMarkers() {
     let markerList = markers.map((item) => {
       let markStyle = {
@@ -108,8 +118,8 @@ export default function GameLevel({
     return markerList;
   }
 
+  // Updates the char.found to true
   function setCharToFound(char) {
-    // update the char.found to true
     let newChars = currentLevel.chars.map((item) => {
       if (char.id === item.id) {
         return { ...item, found: true };
@@ -130,24 +140,14 @@ export default function GameLevel({
     checkCoords(x, y, currentLevel);
   }
 
-  // checks for a win after each char found
-  useEffect(() => {
-    let currentChars = currentLevel.chars.map((item) => {
-      return item.found;
-    });
-    let win = currentChars.every((v) => v === true);
-    if (win === true) {
-      setGameState("won");
-      setMarkers([]);
-    }
-  }, [currentLevel]);
-
   let clickBoxStyle = {
     top: clickBox.y,
     left: clickBox.x,
     visibility: clickBox.visibility,
   };
 
+  // Gets the chars from the current level and returns them as an array
+  // of JSX <option> elements
   function getCharOptions() {
     let currentChars = currentLevel.chars.map((item) => {
       return item;

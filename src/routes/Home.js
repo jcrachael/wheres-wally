@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-
 import InfoBar from "../components/InfoBar";
 import GameLevel from "../components/GameLevel";
 import BeginModal from "../components/BeginModal";
@@ -24,6 +23,7 @@ export default function Home({
   hideNotification,
   saveTime,
 }) {
+  // Restarts the game on initial render
   useEffect(() => {
     restartGame();
   }, []);
